@@ -10,23 +10,31 @@ import java.util.List;
  */
 public class Simulation
 {
+    //this class
     private List<Actor> actors;
     private int step;
 
     /**
      * Create the initial set of actors for the simulation.
      */
-    public Simulation()
-    {
+    public Simulation() {
+
         actors = new LinkedList<>();
         step = 0;
-        City city = new City();
+        City city = null;
+        try {
+            city = new City(-35, -35);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Neither variable can be negative");
+            city = new City();
+        }
         TaxiCompany company = new TaxiCompany(city);
         PassengerSource source = new PassengerSource(city, company);
-        
+
         actors.addAll(company.getVehicles());
         actors.add(source);
         actors.add(new CityGUI(city));
+
     }
     
     /**
@@ -47,8 +55,13 @@ public class Simulation
      */
     public void step()
     {
-        for(Actor actor : actors) {
-            actor.act();
+        try {
+            for (Actor actor : actors) {
+                actor.act();
+            }
+        }catch(NullPointerException e){
+            System.out.println("Missing creation of actors list: " + e);
+
         }
     }
     

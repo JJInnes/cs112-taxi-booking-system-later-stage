@@ -9,6 +9,7 @@ import java.util.List;
  * @version 2016.02.29
  */
 public class City
+    //this class
 {
     private List<Item> items;
     private int width;
@@ -24,16 +25,16 @@ public class City
      */
     public City(int width, int height)
     {
+
         if(width < 1) {
-            throw new IllegalArgumentException(
-                        "Width must be positive: " +
-                        width);
+            throw new IllegalArgumentException("Width must be positive: " + width);
+
         }
         if(height < 1) {
-            throw new IllegalArgumentException(
-                        "Height must be positive: " +
-                        height);
+            throw new IllegalArgumentException("Height must be positive: " + height);
+
         }
+
         this.width = width;
         this.height = height;
         items = new LinkedList<>();

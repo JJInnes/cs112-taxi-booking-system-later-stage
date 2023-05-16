@@ -6,6 +6,7 @@
  */
 public class Location
 {
+    //this class
     private int x;
     private int y;
 
@@ -17,17 +18,23 @@ public class Location
      */
     public Location(int x, int y)
     {
+
         if(x < 0) {
-            throw new IllegalArgumentException(
-                        "Negative x-coordinate: " + x);
+           throw new IllegalArgumentException("Negative x-coordinate:" + x);
+
+
         }
-        if(y < 0) {
-            throw new IllegalArgumentException(
-                        "Negative y-coordinate: " + y);
+         if(y < 0) {
+            throw new IllegalArgumentException("Negative y-coordinate: " + y);
         }
-        this.x = x;
-        this.y = y;
-    }
+
+
+
+                this.x = x;
+                this.y = y;
+
+        }
+
     
     /**
      * Generate the next location to visit in order to
@@ -36,19 +43,22 @@ public class Location
      * @return A location in a direct line from this to
      *         destination.
      */
-    public Location nextLocation(Location destination)
-    {
-        int destX = destination.getX();
-        int destY = destination.getY();
-        int offsetX = x < destX ? 1 : x > destX ? -1 : 0;
-        int offsetY = y < destY ? 1 : y > destY ? -1 : 0;
-        if(offsetX != 0 || offsetY != 0) {
-            return new Location(x + offsetX, y + offsetY);
+    public Location nextLocation(Location destination) {
+
+            int destX = destination.getX();
+            int destY = destination.getY();
+            int offsetX = Integer.compare(destX, x);
+            int offsetY = Integer.compare(destY, y);
+            if (offsetX != 0 || offsetY != 0) {
+
+                return new Location(x + offsetX, y + offsetY);
+
+            } else {
+                return destination;
+            }
+
         }
-        else {
-            return destination;
-        }
-    }
+
 
     /**
      * Determine the number of movements required to get

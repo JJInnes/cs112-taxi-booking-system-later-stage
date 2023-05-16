@@ -14,6 +14,7 @@ import java.util.Random;
  */
 public class TaxiCompany  
 {
+    //this class
     // The vehicles operated by the company.
     private List<Vehicle> vehicles;
     private City city;
@@ -21,7 +22,7 @@ public class TaxiCompany
     // they are to pick up.
     private Map<Vehicle, Passenger> assignments;
 
-    private static final int NUMBER_OF_TAXIS = 3;
+    private static final int NUMBER_OF_TAXIS = 4;
 
     /**
      * @param city The city.
@@ -31,7 +32,12 @@ public class TaxiCompany
         this.city = city;
         vehicles = new LinkedList<>();
         assignments = new HashMap<>();
-        setupVehicles();
+        try {
+            setupVehicles();
+        }catch(Exception e){
+            System.out.println("Number of taxis cannot exceed one 5th of the total grid space");
+            System.exit(1);
+        }
     }
 
     /**
@@ -48,6 +54,7 @@ public class TaxiCompany
             return true;
         }
         else {
+            System.out.println("No available cars currently");
             return false;
         }
     }
@@ -108,14 +115,16 @@ public class TaxiCompany
      *
      * Vehicles start at random locations.
      */
-    private void setupVehicles()
-    {
+    private void setupVehicles() throws Exception {
+        Exception IllegalArgumentException = new Exception();
         int cityWidth = city.getWidth();
         int cityHeight = city.getHeight();
         // Used a fixed random seed for predictable behavior.
         // Use different seeds for less predictable behavior.
         Random rand = new Random(12345);
-
+        if (NUMBER_OF_TAXIS > city.getWidth() * city.getHeight()/5){
+            throw IllegalArgumentException;
+        }
         // Create the taxis.
         for(int i = 0; i < NUMBER_OF_TAXIS; i++){
             Taxi taxi =

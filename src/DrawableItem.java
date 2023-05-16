@@ -9,5 +9,6 @@ import java.awt.Image;
 
 public interface DrawableItem extends Item
 {
+    //this class
     public Image getImage();
 }
