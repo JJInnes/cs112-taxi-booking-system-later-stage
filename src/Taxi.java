@@ -73,6 +73,7 @@ public class Taxi extends Vehicle implements DrawableItem
      */
     public void setPickupLocation(Location location)
     {
+        if (getTargetLocation() != null) {throw new ExistingTargetException(this);}
         setTargetLocation(location);
     }
     
@@ -83,6 +84,9 @@ public class Taxi extends Vehicle implements DrawableItem
      */
     public void pickup(Passenger passenger)
     {
+        if (getTargetLocation() != null) {throw new ExistingTargetException(this);}
+        if (this.passenger != null) {throw new ExistingPassengerException(this);}
+
         this.passenger = passenger;
         setTargetLocation(passenger.getDestination());
     }
