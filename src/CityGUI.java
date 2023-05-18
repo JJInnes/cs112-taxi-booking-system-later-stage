@@ -11,6 +11,7 @@ import javax.swing.*;
  * @version 2016.02.29
  */
 public class CityGUI extends JFrame implements Actor
+//this class
 {
     // The dimensions of the GUI.
     public static final int CITY_VIEW_WIDTH = 600;
